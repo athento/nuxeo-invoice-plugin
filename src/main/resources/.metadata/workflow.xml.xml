@@ -1,0 +1,31 @@
+<xml-extension id="workflow" version="1.2">
+  <xml>&lt;require&gt;org.nuxeo.runtime.started&lt;/require&gt;
+  &lt;extension target=&quot;org.nuxeo.ecm.platform.jbpm.core.JbpmService&quot; point=&quot;typeFilter&quot;&gt;
+    &lt;type name=&quot;Invoice&quot;&gt;
+      &lt;processDefinition&gt;review_parallel&lt;/processDefinition&gt;
+      &lt;processDefinition&gt;review_approbation&lt;/processDefinition&gt;
+    &lt;/type&gt;
+  &lt;/extension&gt;
+
+    &lt;extension target=&quot;org.nuxeo.ecm.platform.actions.ActionService&quot; point=&quot;filters&quot;&gt;
+        &lt;filter id=&quot;filter@wf@ParallelDocumentReview&quot; append=&quot;true&quot;&gt;
+          &lt;rule grant=&quot;true&quot;&gt;
+            &lt;permission&gt;ReadWrite&lt;/permission&gt;
+            &lt;type&gt;Invoice&lt;/type&gt;
+          &lt;/rule&gt;
+          &lt;rule grant=&quot;false&quot;&gt;
+            &lt;condition&gt;document.isImmutable()&lt;/condition&gt;
+          &lt;/rule&gt;
+        &lt;/filter&gt;
+        &lt;filter id=&quot;filter@SerialDocumentReview&quot; append=&quot;true&quot;&gt;
+          &lt;rule grant=&quot;true&quot;&gt;
+            &lt;permission&gt;ReadWrite&lt;/permission&gt;
+            &lt;type&gt;Invoice&lt;/type&gt;
+          &lt;/rule&gt;
+          &lt;rule grant=&quot;false&quot;&gt;
+            &lt;condition&gt;document.isImmutable()&lt;/condition&gt;
+          &lt;/rule&gt;
+        &lt;/filter&gt;
+    &lt;/extension&gt;
+</xml>
+</xml-extension>

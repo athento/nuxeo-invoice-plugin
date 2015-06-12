@@ -1,0 +1,1640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="studio.extensions.project1-msit" version="1.0.0">
+  <require>org.nuxeo.runtime.started</require>
+  <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
+    <schema name="invoice" prefix="invoice" src="data/schemas/invoice.xsd"/>
+    <schema name="Invoice_Search_cv" prefix="Invoice_Search_cv" src="data/schemas/Invoice_Search_cv.xsd"/>
+    <schema name="S_FACTURA" prefix="S_FACTURA" src="data/schemas/S_FACTURA.xsd"/>
+  </extension>
+  <extension target="org.nuxeo.ecm.core.schema.TypeService" point="doctype">
+    <doctype name="Invoice" extends="File">
+      <schema name="invoice"/>
+      <schema name="S_FACTURA"/>
+    </doctype>
+    <doctype name="Invoice_Search_cv" extends="Document">
+      <facet name="ContentViewDisplay"/>
+      <facet name="SavedSearch"/>
+      <facet name="HiddenInNavigation"/>
+      <schema name="Invoice_Search_cv"/>
+    </doctype>
+  </extension>
+  <extension target="org.nuxeo.ecm.core.lifecycle.LifeCycleService" point="types">
+    <types>
+      <type name="Invoice">default</type>
+    </types>
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.types.TypeService" point="types">
+    <type id="Invoice">
+      <label>Invoice</label>
+      <icon>/img/file_100.png</icon>
+      <bigIcon>/img/file_100.png</bigIcon>
+      <description>Invoice</description>
+      <default-view>view_documents</default-view>
+      <layouts mode="create">
+        <layout>layout@Invoice-create</layout>
+      </layouts>
+      <layouts mode="edit">
+        <layout>layout@Invoice-edit</layout>
+      </layouts>
+      <layouts mode="view">
+        <layout>layout@Invoice-view</layout>
+      </layouts>
+    </type>
+    <type id="Folder">
+      <subtypes>
+        <type>Invoice</type>
+      </subtypes>
+    </type>
+    <type id="Workspace">
+      <subtypes>
+        <type>Invoice</type>
+      </subtypes>
+    </type>
+    <type id="Invoice_Search_cv">
+      <label>DefaultSearch</label>
+      <icon>/icons/search.png</icon>
+      <bigIcon>/icons/search_100.png</bigIcon>
+      <description>DefaultSearch.description</description>
+      <default-view>home_view_documents</default-view>
+      <layouts mode="any">
+        <layout>heading</layout>
+        <layout>Invoice_Search_cv@cvLayout</layout>
+      </layouts>
+    </type>
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService" point="actions">
+    <action id="Invoice_Search_search_action" enabled="true" order="0" type="link" immediate="false" link=".">
+      <category>SEARCH_CONTENT_VIEWS</category>
+      <properties>
+        <property name="contentViewName">Invoice_Search</property>
+      </properties>
+    </action>
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.jbpm.core.JbpmService" point="typeFilter">
+    <type name="Invoice">
+      <processDefinition>review_parallel</processDefinition>
+      <processDefinition>review_approbation</processDefinition>
+    </type>
+    
+    <type name="Invoice">
+      
+      <processDefinition>review_parallel</processDefinition>
+      
+      <processDefinition>review_approbation</processDefinition>
+    
+    </type>
+  
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager" point="layouts">
+    <layout name="layout@Invoice-create">
+      <templates>
+        <template mode="any">/layouts/project1-msit_layout_template.xhtml</template>
+      </templates>
+      <rows>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>title</widget>
+          <widget>date</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>provider</widget>
+          <widget>number</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>bill</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>subtotal</widget>
+          <widget>taxes</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>total</widget>
+          <widget/>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>state</widget>
+          <widget>type</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>content</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>description</widget>
+        </row>
+      </rows>
+      <widget name="title" type="text">
+        <labels>
+          <label mode="any">label.factura.title</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:title</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+          <property name="required">true</property>
+        </properties>
+      </widget>
+      <widget name="date" type="datetime">
+        <labels>
+          <label mode="any">label.factura.date</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:date</field>
+        </fields>
+      </widget>
+      <widget name="provider" type="text">
+        <labels>
+          <label mode="any">label.factura.provider</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:provider</field>
+        </fields>
+      </widget>
+      <widget name="number" type="text">
+        <labels>
+          <label mode="any">label.factura.number</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:number</field>
+        </fields>
+      </widget>
+      <widget name="bill" type="textarea">
+        <labels>
+          <label mode="any">label.factura.bill</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:bill</field>
+        </fields>
+      </widget>
+      <widget name="subtotal" type="text">
+        <labels>
+          <label mode="any">label.factura.subtotal</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:subtotal</field>
+        </fields>
+      </widget>
+      <widget name="taxes" type="text">
+        <labels>
+          <label mode="any">label.factura.taxes</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:taxes</field>
+        </fields>
+      </widget>
+      <widget name="total" type="text">
+        <labels>
+          <label mode="any">label.factura.total</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:total</field>
+        </fields>
+      </widget>
+      <widget name="state" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.state</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:state</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">invoicestate</property>
+          <property name="ordering">ordering</property>
+        </properties>
+      </widget>
+      <widget name="type" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.type</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:type</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">type</property>
+          <property name="ordering">ordering</property>
+        </properties>
+      </widget>
+      <widget name="content" type="file">
+        <labels>
+          <label mode="any">label.factura.content</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>file:content</field>
+          <field>file:filename</field>
+        </fields>
+      </widget>
+      <widget name="description" type="textarea">
+        <labels>
+          <label mode="any">label.factura.description</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:description</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+        </properties>
+      </widget>
+    </layout>
+    <layout name="layout@Invoice-edit">
+      <templates>
+        <template mode="any">/layouts/project1-msit_layout_template.xhtml</template>
+      </templates>
+      <rows>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>title</widget>
+          <widget>date</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>provider</widget>
+          <widget>number</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>bill</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>subtotal</widget>
+          <widget>taxes</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>total</widget>
+          <widget/>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>state</widget>
+          <widget>type</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>content</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>description</widget>
+        </row>
+      </rows>
+      <widget name="title" type="text">
+        <labels>
+          <label mode="any">label.factura.title</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:title</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+          <property name="required">true</property>
+        </properties>
+      </widget>
+      <widget name="date" type="datetime">
+        <labels>
+          <label mode="any">label.factura.date</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:date</field>
+        </fields>
+      </widget>
+      <widget name="provider" type="text">
+        <labels>
+          <label mode="any">label.factura.provider</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:provider</field>
+        </fields>
+      </widget>
+      <widget name="number" type="text">
+        <labels>
+          <label mode="any">label.factura.number</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:number</field>
+        </fields>
+      </widget>
+      <widget name="bill" type="textarea">
+        <labels>
+          <label mode="any">label.factura.bill</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:bill</field>
+        </fields>
+      </widget>
+      <widget name="subtotal" type="text">
+        <labels>
+          <label mode="any">label.factura.subtotal</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:subtotal</field>
+        </fields>
+      </widget>
+      <widget name="taxes" type="text">
+        <labels>
+          <label mode="any">label.factura.taxes</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:taxes</field>
+        </fields>
+      </widget>
+      <widget name="total" type="text">
+        <labels>
+          <label mode="any">label.factura.total</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:total</field>
+        </fields>
+      </widget>
+      <widget name="state" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.state</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:state</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">invoicestate</property>
+          <property name="ordering">ordering</property>
+        </properties>
+      </widget>
+      <widget name="type" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.type</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:type</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">type</property>
+        </properties>
+      </widget>
+      <widget name="content" type="file">
+        <labels>
+          <label mode="any">label.factura.content</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>file:content</field>
+          <field>file:filename</field>
+        </fields>
+      </widget>
+      <widget name="description" type="textarea">
+        <labels>
+          <label mode="any">label.factura.description</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:description</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+        </properties>
+      </widget>
+    </layout>
+    <layout name="layout@Invoice-view">
+      <templates>
+        <template mode="any">/layouts/project1-msit_layout_template.xhtml</template>
+      </templates>
+      <rows>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>title</widget>
+          <widget>date</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>provider</widget>
+          <widget>number</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>bill</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>subtotal</widget>
+          <widget>taxes</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>total</widget>
+          <widget/>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>state</widget>
+          <widget>type</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>description</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget/>
+        </row>
+      </rows>
+      <widget name="title" type="text">
+        <labels>
+          <label mode="any">label.factura.title</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:title</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+          <property name="required">true</property>
+        </properties>
+        <properties widgetMode="view">
+          <property name="styleClass">dataInputText</property>
+        </properties>
+      </widget>
+      <widget name="date" type="datetime">
+        <labels>
+          <label mode="any">label.factura.date</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:date</field>
+        </fields>
+      </widget>
+      <widget name="provider" type="text">
+        <labels>
+          <label mode="any">label.factura.provider</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:provider</field>
+        </fields>
+      </widget>
+      <widget name="number" type="text">
+        <labels>
+          <label mode="any">label.factura.number</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:number</field>
+        </fields>
+      </widget>
+      <widget name="bill" type="textarea">
+        <labels>
+          <label mode="any">label.factura.bill</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:bill</field>
+        </fields>
+      </widget>
+      <widget name="subtotal" type="text">
+        <labels>
+          <label mode="any">label.factura.subtotal</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:subtotal</field>
+        </fields>
+      </widget>
+      <widget name="taxes" type="text">
+        <labels>
+          <label mode="any">label.factura.taxes</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:taxes</field>
+        </fields>
+      </widget>
+      <widget name="total" type="text">
+        <labels>
+          <label mode="any">label.factura.total</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:total</field>
+        </fields>
+      </widget>
+      <widget name="state" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.state</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:state</field>
+        </fields>
+        <properties widgetMode="view">
+          <property name="localize">true</property>
+          <property name="directoryName">invoicestate</property>
+        </properties>
+      </widget>
+      <widget name="type" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.type</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>S_FACTURA:type</field>
+        </fields>
+        <properties widgetMode="view">
+          <property name="localize">true</property>
+          <property name="directoryName">type</property>
+        </properties>
+      </widget>
+      <widget name="description" type="textarea">
+        <labels>
+          <label mode="any">label.factura.description</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>dc:description</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="styleClass">dataInputText</property>
+        </properties>
+        <properties widgetMode="view">
+          <property name="styleClass">dataInputText</property>
+        </properties>
+      </widget>
+    </layout>
+    <layout name="Invoice_Search_cv@cvLayout">
+      <templates>
+        <template mode="any">/layouts/project1-msit_layout_template.xhtml</template>
+      </templates>
+      <rows>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>dublincore_title</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_number</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_provider</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_state</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_type</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_subtotal</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_taxes</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_total</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">2</property>
+          </properties>
+          <widget>S_FACTURA_bill</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>S_FACTURA_date_min</widget>
+          <widget>S_FACTURA_date_max</widget>
+        </row>
+        <row>
+          <properties mode="any">
+            <property name="nxl_colspan_0">1</property>
+            <property name="nxl_colspan_1">1</property>
+          </properties>
+          <widget>dublincore_created_min</widget>
+          <widget>dublincore_created_max</widget>
+        </row>
+      </rows>
+      <widget name="dublincore_title" type="text">
+        <labels>
+          <label mode="any">label.factura.title</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:dublincore_title</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_number" type="text">
+        <labels>
+          <label mode="any">label.factura.number</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_number</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_provider" type="text">
+        <labels>
+          <label mode="any">label.factura.provider</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_provider</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_state" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.state</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_state</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">invoicestate</property>
+          <property name="ordering">ordering</property>
+        </properties>
+      </widget>
+      <widget name="S_FACTURA_type" type="selectOneDirectory">
+        <labels>
+          <label mode="any">label.factura.type</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_type</field>
+        </fields>
+        <properties widgetMode="edit">
+          <property name="localize">true</property>
+          <property name="directoryName">type</property>
+          <property name="ordering">ordering</property>
+        </properties>
+      </widget>
+      <widget name="S_FACTURA_subtotal" type="text">
+        <labels>
+          <label mode="any">label.factura.subtotal</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_subtotal</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_taxes" type="text">
+        <labels>
+          <label mode="any">label.factura.taxes</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_taxes</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_total" type="text">
+        <labels>
+          <label mode="any">label.factura.total</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_total</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_bill" type="text">
+        <labels>
+          <label mode="any">label.factura.bill</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_bill</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_date_min" type="datetime">
+        <labels>
+          <label mode="any">label.factura.date</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_date_min</field>
+        </fields>
+      </widget>
+      <widget name="S_FACTURA_date_max" type="datetime">
+        <labels>
+          <label mode="any">label.search.and</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:S_FACTURA_date_max</field>
+        </fields>
+      </widget>
+      <widget name="dublincore_created_min" type="datetime">
+        <labels>
+          <label mode="any">label.factura.created</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:dublincore_created_min</field>
+        </fields>
+      </widget>
+      <widget name="dublincore_created_max" type="datetime">
+        <labels>
+          <label mode="any">label.search.and</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>Invoice_Search_cv:dublincore_created_max</field>
+        </fields>
+      </widget>
+    </layout>
+    <layout name="Invoice_Search@cvListingLayout">
+      <templates>
+        <template mode="any">/layouts/layout_listing_ajax_template.xhtml</template>
+        <template mode="edit_columns">/layouts/layout_column_selection_template.xhtml</template>
+        <template mode="edit_sort_infos">/layouts/layout_sort_infos_template.xhtml</template>
+        <template mode="edit_sort_infos_map">/layouts/layout_sort_infos_template.xhtml</template>
+        <template mode="csv">/layouts/layout_listing_csv_template.xhtml</template>
+        <template mode="pdf">/layouts/layout_listing_pdf_template.xhtml</template>
+      </templates>
+      <properties mode="any">
+        <property name="showListingHeader">true</property>
+        <property name="showRowEvenOddClass">true</property>
+      </properties>
+      <properties mode="edit_columns">
+        <property name="availableElementsLabel">label.selection.availableColumns</property>
+        <property name="selectedElementsLabel">label.selection.selectedColumns</property>
+        <property name="selectedElementsHelp"></property>
+        <property name="selectSize">10</property>
+        <property name="displayAlwaysSelectedColumns">false</property>
+      </properties>
+      <properties mode="edit_sort_infos">
+        <property name="newSortInfoTemplate">#{documentSearchActions.newSortInfo}</property>
+        <property name="required">false</property>
+      </properties>
+      <properties mode="edit_sort_infos_map">
+        <property name="newSortInfoTemplate">#{documentSearchActions.newSortInfoMap}</property>
+        <property name="required">false</property>
+      </properties>
+      <columns>
+        <column name="selection" alwaysSelected="true">
+          <properties mode="any">
+            <property name="isListingSelectionBox">true</property>
+            <property name="useFirstWidgetLabelAsColumnHeader">false</property>
+            <property name="columnStyleClass">iconColumn</property>
+          </properties>
+          <properties mode="csv">
+            <property name="isHidden">true</property>
+          </properties>
+          <properties mode="pdf">
+            <property name="isHidden">true</property>
+          </properties>
+          <widget>listing_ajax_selection_box</widget>
+        </column>
+        <column name="listing_title_link">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.title</property>
+            <property name="sortPropertyName">dc:title</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>listing_title_link</widget>
+        </column>
+        <column name="date">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.date</property>
+            <property name="sortPropertyName">S_FACTURA:date</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>date</widget>
+        </column>
+        <column name="number">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.number</property>
+            <property name="sortPropertyName">S_FACTURA:number</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>number</widget>
+        </column>
+        <column name="provider">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.provider</property>
+            <property name="sortPropertyName">S_FACTURA:provider</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>provider</widget>
+        </column>
+        <column name="state">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.state</property>
+            <property name="sortPropertyName">S_FACTURA:state</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>state</widget>
+        </column>
+        <column name="type">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.type</property>
+            <property name="sortPropertyName">S_FACTURA:type</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>type</widget>
+        </column>
+        <column name="subtotal">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.subtotal</property>
+            <property name="sortPropertyName">S_FACTURA:subtotal</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>subtotal</widget>
+        </column>
+        <column name="taxes">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.taxes</property>
+            <property name="sortPropertyName">S_FACTURA:taxes</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>taxes</widget>
+        </column>
+        <column name="total">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.total</property>
+            <property name="sortPropertyName">S_FACTURA:total</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>total</widget>
+        </column>
+        <column name="bill">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label">label.factura.bill</property>
+            <property name="sortPropertyName">S_FACTURA:bill</property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <widget>bill</widget>
+        </column>
+        <column name="nxl_unknown_col" selectedByDefault="false">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label"></property>
+            <property name="sortPropertyName"></property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+        </column>
+        <column name="nxl_unknown_col_1" selectedByDefault="false">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label"></property>
+            <property name="sortPropertyName"></property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+        </column>
+        <column name="nxl_unknown_col_2" selectedByDefault="false">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label"></property>
+            <property name="sortPropertyName"></property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+        </column>
+        <column name="nxl_unknown_col_3" selectedByDefault="false">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label"></property>
+            <property name="sortPropertyName"></property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+        </column>
+        <column name="nxl_unknown_col_4" selectedByDefault="false">
+          <properties mode="any">
+            <property name="useFirstWidgetLabelAsColumnHeader">true</property>
+            <property name="columnStyleClass"></property>
+            <property name="label"></property>
+            <property name="sortPropertyName"></property>
+          </properties>
+          <properties mode="edit_sort_infos">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+          <properties mode="edit_sort_infos_map">
+            <property name="showInSortInfoSelection">true</property>
+          </properties>
+        </column>
+      </columns>
+      <widget name="listing_title_link" type="listing_title_link">
+        <labels>
+          <label mode="any">label.factura.title</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data</field>
+          <field>data.ref</field>
+          <field>data.dc.description</field>
+          <field>data.file.content</field>
+          <field>data.file.content.filename</field>
+        </fields>
+      </widget>
+      <widget name="date" type="datetime">
+        <labels>
+          <label mode="any">label.factura.date</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['date']</field>
+        </fields>
+      </widget>
+      <widget name="number" type="text">
+        <labels>
+          <label mode="any">label.factura.number</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['number']</field>
+        </fields>
+      </widget>
+      <widget name="provider" type="text">
+        <labels>
+          <label mode="any">label.factura.provider</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['provider']</field>
+        </fields>
+      </widget>
+      <widget name="state" type="text">
+        <labels>
+          <label mode="any">label.factura.state</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['state']</field>
+        </fields>
+        <properties widgetMode="view">
+          <property name="localize">true</property>
+        </properties>
+        <properties mode="any">
+          <property name="localize">true</property>
+        </properties>
+      </widget>
+      <widget name="type" type="text">
+        <labels>
+          <label mode="any">label.factura.type</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['type']</field>
+        </fields>
+        <properties widgetMode="view">
+          <property name="localize">true</property>
+        </properties>
+        <properties mode="any">
+          <property name="localize">true</property>
+        </properties>
+      </widget>
+      <widget name="subtotal" type="text">
+        <labels>
+          <label mode="any">label.factura.subtotal</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['subtotal']</field>
+        </fields>
+      </widget>
+      <widget name="taxes" type="text">
+        <labels>
+          <label mode="any">label.factura.taxes</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['taxes']</field>
+        </fields>
+      </widget>
+      <widget name="total" type="text">
+        <labels>
+          <label mode="any">label.factura.total</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['total']</field>
+        </fields>
+      </widget>
+      <widget name="bill" type="text">
+        <labels>
+          <label mode="any">label.factura.bill</label>
+        </labels>
+        <translated>true</translated>
+        <fields>
+          <field>data['S_FACTURA']['bill']</field>
+        </fields>
+      </widget>
+    </layout>
+  </extension>
+  <extension target="org.nuxeo.ecm.core.versioning.VersioningService" point="versioningRules">
+    <versioningRule typeName="Invoice">
+      <initialState major="0" minor="0"/>
+      <options lifeCycleState="*">
+        <none default="true"/>
+        <minor/>
+        <major/>
+      </options>
+    </versioningRule>
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService" point="contentViews">
+    <contentView name="Invoice_Search">
+      <genericPageProvider class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+        <property name="coreSession">#{documentManager}</property>
+        <whereClause>
+          <predicate parameter="dc:title" operator="STARTSWITH">
+            <field schema="Invoice_Search_cv" name="dublincore_title"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:number" operator="STARTSWITH">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_number"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:provider" operator="STARTSWITH">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_provider"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:state" operator="=">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_state"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:type" operator="=">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_type"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:subtotal" operator="=">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_subtotal"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:taxes" operator="STARTSWITH">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_taxes"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:total" operator="STARTSWITH">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_total"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:bill" operator="=">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_bill"/>
+          </predicate>
+          <predicate parameter="S_FACTURA:date" operator="BETWEEN">
+            <field schema="Invoice_Search_cv" name="S_FACTURA_date_min"/>
+            <field schema="Invoice_Search_cv" name="S_FACTURA_date_max"/>
+          </predicate>
+          <predicate parameter="dc:created" operator="BETWEEN">
+            <field schema="Invoice_Search_cv" name="dublincore_created_min"/>
+            <field schema="Invoice_Search_cv" name="dublincore_created_max"/>
+          </predicate>
+          <fixedPart>ecm:mixinType != 'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND ecm:currentLifeCycleState != 'deleted' AND ecm:primaryType = 'Invoice'</fixedPart>
+        </whereClause>
+        <searchDocumentType>Invoice_Search_cv</searchDocumentType>
+        <sort column="dc:title" ascending="true"/>
+        <pageSize>10</pageSize>
+      </genericPageProvider>
+      <searchLayout name="Invoice_Search_cv@cvLayout"/>
+      <useGlobalPageSize>true</useGlobalPageSize>
+      <refresh>
+        <event>documentChanged</event>
+        <event>documentChildrenChanged</event>
+      </refresh>
+      <cacheKey>#{currentDocument.id}</cacheKey>
+      <cacheSize>10</cacheSize>
+      <selectionList>CURRENT_SELECTION</selectionList>
+      <showTitle>false</showTitle>
+      <showFilterForm>true</showFilterForm>
+      <showPageSizeSelector>true</showPageSizeSelector>
+      <showRefreshCommand>true</showRefreshCommand>
+      <actions category="CURRENT_SELECTION_LIST"/>
+      <actions category="cv_actions@Invoice_Search"/>
+      <resultLayouts>
+        <layout name="Invoice_Search@cvListingLayout" title="document_listing" translateTitle="true" iconPath="/icons/document_listing_icon.png" showCSVExport="true" showEditColumns="true" showSpreadsheet="true"/>
+      </resultLayouts>
+      <resultColumns>#{searchDocument.cvd.selectedLayoutColumns}</resultColumns>
+      <resultLayout>#{searchDocument.cvd.resultLayoutName}</resultLayout>
+      <flags>
+        <flag>SEARCH</flag>
+      </flags>
+    </contentView>
+  </extension>
+  <extension target="org.nuxeo.ecm.directory.sql.SQLDirectoryFactory" point="directories">
+    <directory name="invoicestate">
+      <schema>vocabulary</schema>
+      <dataSource>java:/nxsqldirectory</dataSource>
+      <cacheTimeout>3600</cacheTimeout>
+      <cacheMaxSize>1000</cacheMaxSize>
+      <idField>id</idField>
+      <autoincrementIdField>false</autoincrementIdField>
+      <createTablePolicy>on_missing_columns</createTablePolicy>
+      <!-- <createTablePolicy>always</createTablePolicy> -->
+      <table>studio_vocabulary_invoicestate</table>
+      <dataFile>data/vocabularies/invoicestate.csv</dataFile>
+    </directory>
+    <directory name="type">
+      <schema>vocabulary</schema>
+      <dataSource>java:/nxsqldirectory</dataSource>
+      <cacheTimeout>3600</cacheTimeout>
+      <cacheMaxSize>1000</cacheMaxSize>
+      <idField>id</idField>
+      <autoincrementIdField>false</autoincrementIdField>
+      <createTablePolicy>on_missing_columns</createTablePolicy>
+      <table>studio_vocabulary_type</table>
+      <dataFile>data/vocabularies/type.csv</dataFile>
+    </directory>
+  </extension>
+  <extension target="org.nuxeo.ecm.directory.ui.DirectoryUIManager" point="directories">
+    <directory name="invoicestate" layout="vocabulary" sortField="label"/>
+    <directory name="type" layout="vocabulary" sortField="label"/>
+  </extension>
+  <require>org.nuxeo.runtime.started</require>
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService" point="filters">
+        
+    <filter id="filter@wf@ParallelDocumentReview" append="true">
+          
+      <rule grant="true">
+            
+        <permission>ReadWrite</permission>
+            
+        <type>Invoice</type>
+          
+      </rule>
+          
+      <rule grant="false">
+            
+        <condition>document.isImmutable()</condition>
+          
+      </rule>
+        
+    </filter>
+        
+    <filter id="filter@SerialDocumentReview" append="true">
+          
+      <rule grant="true">
+            
+        <permission>ReadWrite</permission>
+            
+        <type>Invoice</type>
+          
+      </rule>
+          
+      <rule grant="false">
+            
+        <condition>document.isImmutable()</condition>
+          
+      </rule>
+        
+    </filter>
+    
+    <filter id="create" append="true">
+      <rule grant="false">
+        <type>Invoice</type>
+      </rule>
+    </filter>
+  </extension>
+  <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager" point="widgettypes">
+
+    
+    <documentation>Widget types declared in studio</documentation>
+
+    
+    <widgetType name="studio_header">
+      
+      <configuration>
+        
+        <title>Header</title>
+        
+        <description>
+          The header widget just displays the widget label.
+        </description>
+        
+        <supportedModes>
+          
+          <mode>edit</mode>
+          
+          <mode>view</mode>
+        
+        </supportedModes>
+        
+        <fields>
+          
+          <list>false</list>
+          
+          <complex>false</complex>
+          
+          <supportedTypes/>
+          
+          <defaultTypes/>
+        
+        </fields>
+        
+        <handlingLabels>true</handlingLabels>
+        
+        <categories>
+          
+          <category>document</category>
+          
+          <category>studio</category>
+        
+        </categories>
+        
+        <properties>
+          
+          <layouts mode="any">
+            
+            <layout name="studio_header_widget_type_properties_any">
+              
+              <rows>
+                
+                <row>
+                  
+                  <widget>styleClass</widget>
+                
+                </row>
+                
+                <row>
+                  
+                  <widget>style</widget>
+                
+                </row>
+              
+              </rows>
+              
+              <widget name="styleClass" type="text">
+                
+                <labels>
+                  
+                  <label mode="any">Style class</label>
+                
+                </labels>
+                
+                <fields>
+                  
+                  <field>styleClass</field>
+                
+                </fields>
+              
+              </widget>
+              
+              <widget name="style" type="text">
+                
+                <labels>
+                  
+                  <label mode="any">Style</label>
+                
+                </labels>
+                
+                <fields>
+                  
+                  <field>style</field>
+                
+                </fields>
+              
+              </widget>
+            
+            </layout>
+          
+          </layouts>
+        
+        </properties>
+      
+      </configuration>
+      
+      <handler-class>
+        org.nuxeo.ecm.platform.forms.layout.facelets.plugins.TemplateWidgetTypeHandler
+      </handler-class>
+      
+      <property name="template">
+        /widgets/studio_header_widget.xhtml
+      </property>
+    
+    </widgetType>
+
+    
+    <widgetType name="filesList">
+      
+      <configuration>
+        
+        <title>Files</title>
+        
+        <description>
+          
+          <p>
+            The Files displays an editable list of files, using javascript to
+            keep the uploaded file path when adding several files in a row.
+          </p>
+          
+          <p>Items are defined using sub wigdets configuration.</p>
+          
+          <p>
+            This is actually a template widget type whose template uses a
+            &lt;nxu:inputList /&gt; tag in edit or create mode, and a table
+            iterating over items in other modes.
+          </p>
+        
+        </description>
+        
+        <categories>
+          
+          <category>document</category>
+          
+          <category>studio</category>
+        
+        </categories>
+        
+        <supportedModes>
+          
+          <mode>edit</mode>
+          
+          <mode>view</mode>
+        
+        </supportedModes>
+        
+        <acceptingSubWidgets>true</acceptingSubWidgets>
+        
+        <fields>
+          
+          <list>true</list>
+          
+          <complex>false</complex>
+          
+          <supportedTypes>
+            
+            <type>blob</type>
+          
+          </supportedTypes>
+          
+          <defaultTypes>
+            
+            <type>blob</type>
+          
+          </defaultTypes>
+        
+        </fields>
+        
+        <properties>
+          
+          <layouts mode="edit">
+            
+            <layout name="list_widget_type_properties_edit">
+              
+              <rows>
+                
+                <row>
+                  
+                  <widget>required</widget>
+                
+                </row>
+                
+                <row>
+                  
+                  <widget>diff</widget>
+                
+                </row>
+              
+              </rows>
+              
+              <widget name="required" type="checkbox">
+                
+                <labels>
+                  
+                  <label mode="any">Required</label>
+                
+                </labels>
+                
+                <fields>
+                  
+                  <field>required</field>
+                
+                </fields>
+              
+              </widget>
+              
+              <widget name="diff" type="checkbox">
+                
+                <labels>
+                  
+                  <label mode="any">Diff</label>
+                
+                </labels>
+                
+                <fields>
+                  
+                  <field>diff</field>
+                
+                </fields>
+              
+              </widget>
+            
+            </layout>
+          
+          </layouts>
+        
+        </properties>
+      
+      </configuration>
+      
+      <handler-class>
+        org.nuxeo.ecm.platform.forms.layout.facelets.plugins.TemplateWidgetTypeHandler
+      </handler-class>
+      
+      <property name="template">/widgets/files_list_widget_template.xhtml
+      </property>
+    
+    </widgetType>
+
+  
+  </extension>
+</component>

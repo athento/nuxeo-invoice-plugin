@@ -1,0 +1,19 @@
+<vocabulary id="type" version="1.2">
+  <content>
+    <string-array>
+      <string>label.factura.issuedinvoices</string>
+      <string>label.factura.issuedinvoices</string>
+      <string>0</string>
+      <string>0</string>
+    </string-array>
+    <string-array>
+      <string>label.factura.accountspayable</string>
+      <string>label.factura.accountspayable</string>
+      <string>0</string>
+      <string>1</string>
+    </string-array>
+  </content>
+  <isHierarchical>false</isHierarchical>
+  <numberOfLevels>0</numberOfLevels>
+  <createTablePolicy>on_missing_columns</createTablePolicy>
+</vocabulary>
