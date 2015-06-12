@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: athento.factura
+Bundle-SymbolicName: org.athento.nuxeo.types.Invoice
 Bundle-Version: 1.0.0
-Bundle-Name: Athento - athento.factura
+Bundle-Name: Athento - org.athento.nuxeo.types.Invoice
 Require-Bundle: org.nuxeo.runtime
 Bundle-ManifestVersion: 2
 Bundle-Vendor: Athento
