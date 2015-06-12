@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component name="studio.extensions.project1-msit" version="1.0.0">
+<component name="org.athento.nuxeo.types.Invoice" version="1.0.0">
   <require>org.nuxeo.runtime.started</require>
   <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
     <schema name="invoice" prefix="invoice" src="data/schemas/invoice.xsd"/>
@@ -1320,7 +1320,7 @@
       <autoincrementIdField>false</autoincrementIdField>
       <createTablePolicy>on_missing_columns</createTablePolicy>
       <!-- <createTablePolicy>always</createTablePolicy> -->
-      <table>studio_vocabulary_invoicestate</table>
+      <table>vocabulary_invoicestate</table>
       <dataFile>data/vocabularies/invoicestate.csv</dataFile>
     </directory>
     <directory name="type">
@@ -1331,7 +1331,7 @@
       <idField>id</idField>
       <autoincrementIdField>false</autoincrementIdField>
       <createTablePolicy>on_missing_columns</createTablePolicy>
-      <table>studio_vocabulary_type</table>
+      <table>vocabulary_type</table>
       <dataFile>data/vocabularies/type.csv</dataFile>
     </directory>
   </extension>
@@ -1387,10 +1387,10 @@
   <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager" point="widgettypes">
 
     
-    <documentation>Widget types declared in studio</documentation>
+    <documentation>Widget types declared</documentation>
 
     
-    <widgetType name="studio_header">
+    <widgetType name="athento_widget_header">
       
       <configuration>
         
@@ -1426,7 +1426,7 @@
           
           <category>document</category>
           
-          <category>studio</category>
+          <category>athento</category>
         
         </categories>
         
@@ -1434,7 +1434,7 @@
           
           <layouts mode="any">
             
-            <layout name="studio_header_widget_type_properties_any">
+            <layout name="athento_widget_header_widget_type_properties_any">
               
               <rows>
                 
@@ -1497,7 +1497,7 @@
       </handler-class>
       
       <property name="template">
-        /widgets/studio_header_widget.xhtml
+        /widgets/athento_header_widget.xhtml
       </property>
     
     </widgetType>
@@ -1530,7 +1530,7 @@
           
           <category>document</category>
           
-          <category>studio</category>
+          <category>athento</category>
         
         </categories>
         
@@ -1630,7 +1630,7 @@
         org.nuxeo.ecm.platform.forms.layout.facelets.plugins.TemplateWidgetTypeHandler
       </handler-class>
       
-      <property name="template">/widgets/files_list_widget_template.xhtml
+      <property name="template">/widgets/list_widget_template.xhtml
       </property>
     
     </widgetType>
