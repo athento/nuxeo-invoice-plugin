@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/project1-msit/invoice" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/project1-msit/invoice">  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/athento/Invoice" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/athento/Invoice">  
   <!-- helper XSD definitions for list types -->  
   <xs:complexType name="content"> 
     <xs:sequence> 
@@ -32,4 +32,13 @@
       <xs:element name="item" type="nxs:content" minOccurs="0" maxOccurs="unbounded"/> 
     </xs:sequence> 
   </xs:complexType>  
+  <xs:element name="bill" type="xs:string"/>
+  <xs:element name="date" type="xs:date"/>
+  <xs:element name="number" type="xs:string"/>
+  <xs:element name="provider" type="xs:string"/>
+  <xs:element name="state" type="xs:string"/>
+  <xs:element name="subtotal" type="xs:string"/>
+  <xs:element name="taxes" type="xs:string"/>
+  <xs:element name="total" type="xs:string"/>
+  <xs:element name="type" type="xs:string"/>
 </xs:schema>

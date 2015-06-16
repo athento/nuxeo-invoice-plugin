@@ -6,6 +6,7 @@
       <java>${bundle.fileName}</java> 
     </module> 
   </extension>  
+  <require>org.nuxeo.ecm.webapp.ui</require>
   <require>all</require>
   <install>
     <delete path="${bundle.fileName}.tmp"/>

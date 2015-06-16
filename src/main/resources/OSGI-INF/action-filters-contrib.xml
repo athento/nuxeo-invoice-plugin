@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="org.athento.nuxeo.filters.InvoiceFilters"
+	version="1.0.0">
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+		<filter id="filter@wf@ParallelDocumentReview" append="true">
+			<rule grant="true">
+				<permission>ReadWrite</permission>
+				<type>Invoice</type>
+			</rule>
+			<rule grant="false">
+				<condition>document.isImmutable()</condition>
+			</rule>
+		</filter>
+		<filter id="filter@SerialDocumentReview" append="true">
+			<rule grant="true">
+				<permission>ReadWrite</permission>
+				<type>Invoice</type>
+			</rule>
+			<rule grant="false">
+				<condition>document.isImmutable()</condition>
+			</rule>
+		</filter>
+		<filter id="create" append="true">
+			<rule grant="false">
+				<type>Invoice</type>
+			</rule>
+		</filter>
+	</extension>
+</component>
