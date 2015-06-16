@@ -1,11 +1,13 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: org.athento.nuxeo.types.Invoice
+Require-Bundle: org.nuxeo.runtime
+Bundle-Vendor: Athento
 Bundle-Version: 1.0.0
 Bundle-Name: Athento - org.athento.nuxeo.types.Invoice
-Require-Bundle: org.nuxeo.runtime
 Bundle-ManifestVersion: 2
-Bundle-Vendor: Athento
-Nuxeo-Component: OSGI-INF/extensions.xml
+Nuxeo-Component: OSGI-INF/_other-contrib.xml,OSGI-INF/action-contrib.x
+ ml,OSGI-INF/action-filters-contrib.xml,OSGI-INF/contentViews-contrib.
+ xml,OSGI-INF/SQLDirectories-vocabularies-contrib.xml,OSGI-INF/types-c
+ ontrib.xml,OSGI-INF/weblayout-layouts.xml
 Created-By: Athento
-
+Bundle-SymbolicName: org.athento.nuxeo.types.Invoice
 

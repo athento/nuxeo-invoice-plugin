@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="org.athento.nuxeo.contrib.InvoiceContrib"
+	version="1.0.0">
+	<extension target="org.nuxeo.ecm.core.versioning.VersioningService"
+		point="versioningRules">
+		<versioningRule typeName="Invoice">
+			<initialState major="0" minor="0" />
+			<options lifeCycleState="*">
+				<none default="true" />
+				<minor />
+				<major />
+			</options>
+		</versioningRule>
+	</extension>
+	<extension target="org.nuxeo.ecm.platform.jbpm.core.JbpmService"
+		point="typeFilter">
+		<type name="Invoice">
+			<processDefinition>review_parallel</processDefinition>
+			<processDefinition>review_approbation</processDefinition>
+		</type>
+	</extension>
+	<extension target="org.nuxeo.ecm.core.lifecycle.LifeCycleService"
+		point="types">
+		<types>
+			<type name="Invoice">default</type>
+		</types>
+	</extension>
+</component>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/project1-msit/Invoice_Search_cv" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/project1-msit/Invoice_Search_cv">  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/athento/Invoice_Search_cv" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/athento/Invoice_Search_cv">  
   <!-- helper XSD definitions for list types -->  
   <xs:complexType name="content"> 
     <xs:sequence> 
@@ -32,17 +33,17 @@
       <xs:element name="item" type="nxs:content" minOccurs="0" maxOccurs="unbounded"/> 
     </xs:sequence> 
   </xs:complexType>  
-  <xs:element name="dublincore_title" type="xs:string"/>
-  <xs:element name="S_FACTURA_number" type="xs:string"/>
-  <xs:element name="S_FACTURA_provider" type="xs:string"/>
-  <xs:element name="S_FACTURA_state" type="xs:string"/>
-  <xs:element name="S_FACTURA_type" type="xs:string"/>
-  <xs:element name="S_FACTURA_subtotal" type="xs:string"/>
-  <xs:element name="S_FACTURA_taxes" type="xs:string"/>
-  <xs:element name="S_FACTURA_total" type="xs:string"/>
-  <xs:element name="S_FACTURA_bill" type="xs:string"/>
-  <xs:element name="S_FACTURA_date_min" type="xs:date"/>
-  <xs:element name="S_FACTURA_date_max" type="xs:date"/>
-  <xs:element name="dublincore_created_min" type="xs:date"/>
-  <xs:element name="dublincore_created_max" type="xs:date"/>
+  <xs:element name="Invoice_title" type="xs:string"/>
+  <xs:element name="Invoice_number" type="xs:string"/>
+  <xs:element name="Invoice_provider" type="xs:string"/>
+  <xs:element name="Invoice_state" type="xs:string"/>
+  <xs:element name="Invoice_type" type="xs:string"/>
+  <xs:element name="Invoice_subtotal" type="xs:string"/>
+  <xs:element name="Invoice_taxes" type="xs:string"/>
+  <xs:element name="Invoice_total" type="xs:string"/>
+  <xs:element name="Invoice_bill" type="xs:string"/>
+  <xs:element name="Invoice_date_min" type="xs:date"/>
+  <xs:element name="Invoice_date_max" type="xs:date"/>
+  <xs:element name="Invoice_created_min" type="xs:date"/>
+  <xs:element name="Invoice_created_max" type="xs:date"/>
 </xs:schema>
