@@ -3,6 +3,7 @@
 <component name="org.athento.nuxeo.layouts.InvoiceLayouts" version="1.0.0">	
 	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
 		point="layouts">
+		
 		<layout name="layout@Invoice-edit">
 			<templates>
 				<template mode="any">/layouts/widget_layout_template.xhtml
@@ -15,37 +16,15 @@
 						<property name="nxl_colspan_1">1</property>
 					</properties>
 					<widget>title</widget>
-					<widget>date</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>provider</widget>
 					<widget>number</widget>
 				</row>
 				<row>
 					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>bill</widget>
-				</row>
-				<row>
-					<properties mode="any">
 						<property name="nxl_colspan_0">1</property>
 						<property name="nxl_colspan_1">1</property>
 					</properties>
-					<widget>subtotal</widget>
-					<widget>taxes</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>total</widget>
-					<widget />
+					<widget>date_issued</widget>
+					<widget>date_paid</widget>
 				</row>
 				<row>
 					<properties mode="any">
@@ -57,6 +36,38 @@
 				</row>
 				<row>
 					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>issuer_id</widget>
+					<widget>issuer_code</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>billTo_id</widget>
+					<widget>billTo_code</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>subtotal</widget>
+					<widget>total</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>taxes</widget>
+					<widget>taxes_percent</widget>
+				</row>
+				<row>
+					<properties mode="edit">
 						<property name="nxl_colspan_0">2</property>
 					</properties>
 					<widget>content</widget>
@@ -68,113 +79,27 @@
 					<widget>description</widget>
 				</row>
 			</rows>
-			<widget name="title" type="text">
+			<widget name="billTo_code" type="textarea">
 				<labels>
-					<label mode="any">label.factura.title</label>
+					<label mode="any">label.invoice.billTo.code</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>dc:title</field>
-				</fields>
-				<properties widgetMode="edit">
-					<property name="styleClass">dataInputText</property>
-					<property name="required">true</property>
-					<property name="ordering">ordering</property>
-				</properties>
-			</widget>
-			<widget name="date" type="datetime">
-				<labels>
-					<label mode="any">label.factura.date</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:date</field>
+					<field>Invoice:billTo_code</field>
 				</fields>
 			</widget>
-			<widget name="provider" type="text">
+			<widget name="billTo_id" type="textarea">
 				<labels>
-					<label mode="any">label.factura.provider</label>
+					<label mode="any">label.invoice.billTo.id</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice:provider</field>
+					<field>Invoice:billTo_id</field>
 				</fields>
-			</widget>
-			<widget name="number" type="text">
-				<labels>
-					<label mode="any">label.factura.number</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:number</field>
-				</fields>
-			</widget>
-			<widget name="bill" type="textarea">
-				<labels>
-					<label mode="any">label.factura.bill</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:bill</field>
-				</fields>
-			</widget>
-			<widget name="subtotal" type="text">
-				<labels>
-					<label mode="any">label.factura.subtotal</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:subtotal</field>
-				</fields>
-			</widget>
-			<widget name="taxes" type="text">
-				<labels>
-					<label mode="any">label.factura.taxes</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:taxes</field>
-				</fields>
-			</widget>
-			<widget name="total" type="text">
-				<labels>
-					<label mode="any">label.factura.total</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:total</field>
-				</fields>
-			</widget>
-			<widget name="state" type="selectOneDirectory">
-				<labels>
-					<label mode="any">label.factura.state</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:state</field>
-				</fields>
-				<properties widgetMode="edit">
-					<property name="localize">true</property>
-					<property name="directoryName">invoiceStates</property>
-					<property name="ordering">ordering</property>
-				</properties>
-			</widget>
-			<widget name="type" type="selectOneDirectory">
-				<labels>
-					<label mode="any">label.factura.type</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:type</field>
-				</fields>
-				<properties widgetMode="edit">
-					<property name="localize">true</property>
-					<property name="directoryName">invoiceTypes</property>
-				</properties>
 			</widget>
 			<widget name="content" type="file">
 				<labels>
-					<label mode="any">label.factura.content</label>
+					<label mode="any">label.invoice.content</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -182,88 +107,112 @@
 					<field>file:filename</field>
 				</fields>
 			</widget>
+			<widget name="date_issued" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_issued</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:date_issued</field>
+				</fields>
+			</widget>
+			<widget name="date_paid" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_paid</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:date_paid</field>
+				</fields>
+			</widget>
 			<widget name="description" type="textarea">
 				<labels>
-					<label mode="any">label.factura.description</label>
+					<label mode="any">label.invoice.description</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>dc:description</field>
 				</fields>
-				<properties widgetMode="edit">
+				<properties widgetMode="any">
 					<property name="styleClass">dataInputText</property>
 				</properties>
 			</widget>
-		</layout>
-		<layout name="layout@Invoice-view">
-			<templates>
-				<template mode="any">
-					/layouts/widget_layout_template.xhtml
-				</template>
-			</templates>
-			<rows>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>title</widget>
-					<widget>date</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>provider</widget>
-					<widget>number</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>bill</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>subtotal</widget>
-					<widget>taxes</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>total</widget>
-					<widget />
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">1</property>
-						<property name="nxl_colspan_1">1</property>
-					</properties>
-					<widget>state</widget>
-					<widget>type</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>description</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget />
-				</row>
-			</rows>
+			<widget name="issuer_code" type="text">
+				<labels>
+					<label mode="any">label.invoice.issuer.code</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:issuer_code</field>
+				</fields>
+			</widget>
+			<widget name="issuer_id" type="text">
+				<labels>
+					<label mode="any">label.invoice.issuer.id</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:issuer_id</field>
+				</fields>
+			</widget>
+			<widget name="number" type="text">
+				<labels>
+					<label mode="any">label.invoice.number</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:number</field>
+				</fields>
+			</widget>
+			<widget name="subtotal" type="double">
+				<labels>
+					<label mode="any">label.invoice.subtotal</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:subtotal</field>
+				</fields>
+			</widget>
+			<widget name="taxes" type="double">
+				<labels>
+					<label mode="any">label.invoice.taxes</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:taxes</field>
+				</fields>
+			</widget>
+			<widget name="taxes_percent" type="double">
+				<labels>
+					<label mode="any">label.invoice.taxes_percent</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:taxes_percent</field>
+				</fields>
+			</widget>
+
+			<widget name="state" type="selectOneDirectory">
+				<labels>
+					<label mode="any">label.invoice.state</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:state</field>
+				</fields>
+				<properties widgetMode="edit">
+					<property name="localize">true</property>
+					<property name="directoryName">invoiceStates</property>
+					<property name="ordering">ordering</property>
+				</properties>
+				<properties widgetMode="view">
+					<property name="localize">true</property>
+					<property name="directoryName">invoiceStates</property>
+				</properties>
+			</widget>
 			<widget name="title" type="text">
 				<labels>
-					<label mode="any">label.factura.title</label>
+					<label mode="any">label.invoice.title</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -272,116 +221,36 @@
 				<properties widgetMode="edit">
 					<property name="styleClass">dataInputText</property>
 					<property name="required">true</property>
+					<property name="ordering">ordering</property>
 				</properties>
 				<properties widgetMode="view">
 					<property name="styleClass">dataInputText</property>
 				</properties>
 			</widget>
-			<widget name="date" type="datetime">
+			<widget name="total" type="double">
 				<labels>
-					<label mode="any">label.factura.date</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:date</field>
-				</fields>
-			</widget>
-			<widget name="provider" type="text">
-				<labels>
-					<label mode="any">label.factura.provider</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:provider</field>
-				</fields>
-			</widget>
-			<widget name="number" type="text">
-				<labels>
-					<label mode="any">label.factura.number</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:number</field>
-				</fields>
-			</widget>
-			<widget name="bill" type="textarea">
-				<labels>
-					<label mode="any">label.factura.bill</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:bill</field>
-				</fields>
-			</widget>
-			<widget name="subtotal" type="text">
-				<labels>
-					<label mode="any">label.factura.subtotal</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:subtotal</field>
-				</fields>
-			</widget>
-			<widget name="taxes" type="text">
-				<labels>
-					<label mode="any">label.factura.taxes</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:taxes</field>
-				</fields>
-			</widget>
-			<widget name="total" type="text">
-				<labels>
-					<label mode="any">label.factura.total</label>
+					<label mode="any">label.invoice.total</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>Invoice:total</field>
 				</fields>
 			</widget>
-			<widget name="state" type="selectOneDirectory">
-				<labels>
-					<label mode="any">label.factura.state</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>Invoice:state</field>
-				</fields>
-				<properties widgetMode="view">
-					<property name="localize">true</property>
-					<property name="directoryName">invoiceStates</property>
-				</properties>
-			</widget>
 			<widget name="type" type="selectOneDirectory">
 				<labels>
-					<label mode="any">label.factura.type</label>
+					<label mode="any">label.invoice.type</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>Invoice:type</field>
 				</fields>
-				<properties widgetMode="view">
+				<properties widgetMode="any">
 					<property name="localize">true</property>
 					<property name="directoryName">invoiceTypes</property>
 				</properties>
 			</widget>
-			<widget name="description" type="textarea">
-				<labels>
-					<label mode="any">label.factura.description</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>dc:description</field>
-				</fields>
-				<properties widgetMode="edit">
-					<property name="styleClass">dataInputText</property>
-				</properties>
-				<properties widgetMode="view">
-					<property name="styleClass">dataInputText</property>
-				</properties>
-			</widget>
 		</layout>
+
 		<layout name="Invoice_Search_cv@search">
 			<templates>
 				<template mode="any">/layouts/widget_layout_template.xhtml
@@ -402,9 +271,19 @@
 				</row>
 				<row>
 					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
 					</properties>
-					<widget>Invoice_provider</widget>
+					<widget>Invoice_issuer_id</widget>
+					<widget>Invoice_issuer_code</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_billTo_id</widget>
+					<widget>Invoice_billTo_code</widget>
 				</row>
 				<row>
 					<properties mode="any">
@@ -420,48 +299,64 @@
 				</row>
 				<row>
 					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
 					</properties>
-					<widget>Invoice_subtotal</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>Invoice_taxes</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>Invoice_total</widget>
-				</row>
-				<row>
-					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
-					</properties>
-					<widget>Invoice_bill</widget>
+					<widget>Invoice_subtotal_min</widget>
+					<widget>Invoice_subtotal_max</widget>
 				</row>
 				<row>
 					<properties mode="any">
 						<property name="nxl_colspan_0">1</property>
 						<property name="nxl_colspan_1">1</property>
 					</properties>
-					<widget>Invoice_date_min</widget>
-					<widget>Invoice_date_max</widget>
+					<widget>Invoice_taxes_min</widget>
+					<widget>Invoice_taxes_max</widget>
 				</row>
 				<row>
 					<properties mode="any">
 						<property name="nxl_colspan_0">1</property>
 						<property name="nxl_colspan_1">1</property>
 					</properties>
-					<widget>Invoice_created_min</widget>
-					<widget>Invoice_created_max</widget>
+					<widget>Invoice_taxes_percent_min</widget>
+					<widget>Invoice_taxes_percent_max</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_total_min</widget>
+					<widget>Invoice_total_max</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_date_issued_min</widget>
+					<widget>Invoice_date_issued_max</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_date_paid_min</widget>
+					<widget>Invoice_date_paid_max</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_date_created_min</widget>
+					<widget>Invoice_date_created_max</widget>
 				</row>
 			</rows>
 			<widget name="Invoice_title" type="text">
 				<labels>
-					<label mode="any">label.factura.title</label>
+					<label mode="any">label.invoice.title</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -470,25 +365,52 @@
 			</widget>
 			<widget name="Invoice_number" type="text">
 				<labels>
-					<label mode="any">label.factura.number</label>
+					<label mode="any">label.invoice.number</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>Invoice_Search_cv:Invoice_number</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_provider" type="text">
+			<widget name="Invoice_issuer_code" type="text">
 				<labels>
-					<label mode="any">label.factura.provider</label>
+					<label mode="any">label.invoice.issuer.code</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_provider</field>
+					<field>Invoice_Search_cv:Invoice_issuer_code</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_issuer_id" type="text">
+				<labels>
+					<label mode="any">label.invoice.issuer.id</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_issuer_id</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_billTo_code" type="text">
+				<labels>
+					<label mode="any">label.invoice.billTo.code</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_billTo_code</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_billTo_id" type="text">
+				<labels>
+					<label mode="any">label.invoice.billTo.id</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_billTo_id</field>
 				</fields>
 			</widget>
 			<widget name="Invoice_state" type="selectOneDirectory">
 				<labels>
-					<label mode="any">label.factura.state</label>
+					<label mode="any">label.invoice.state</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -502,7 +424,7 @@
 			</widget>
 			<widget name="Invoice_type" type="selectOneDirectory">
 				<labels>
-					<label mode="any">label.factura.type</label>
+					<label mode="any">label.invoice.type</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -514,76 +436,134 @@
 					<property name="ordering">ordering</property>
 				</properties>
 			</widget>
-			<widget name="Invoice_subtotal" type="text">
+			<widget name="Invoice_subtotal_max" type="double">
 				<labels>
-					<label mode="any">label.factura.subtotal</label>
+					<label mode="any">label.invoice.subtotal.max</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_subtotal</field>
+					<field>Invoice_Search_cv:Invoice_subtotal_max</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_taxes" type="text">
+
+			<widget name="Invoice_subtotal_min" type="double">
 				<labels>
-					<label mode="any">label.factura.taxes</label>
+					<label mode="any">label.invoice.subtotal.min</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_taxes</field>
+					<field>Invoice_Search_cv:Invoice_subtotal_min</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_total" type="text">
+
+
+			<widget name="Invoice_taxes_min" type="double">
 				<labels>
-					<label mode="any">label.factura.total</label>
+					<label mode="any">label.invoice.taxes.min</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_total</field>
+					<field>Invoice_Search_cv:Invoice_taxes_min</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_bill" type="text">
+			<widget name="Invoice_taxes_max" type="double">
 				<labels>
-					<label mode="any">label.factura.bill</label>
+					<label mode="any">label.invoice.taxes.max</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_bill</field>
+					<field>Invoice_Search_cv:Invoice_taxes_max</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_date_min" type="datetime">
+			<widget name="Invoice_taxes_percent_max" type="double">
 				<labels>
-					<label mode="any">label.factura.date</label>
+					<label mode="any">label.invoice.taxes_percent.max</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_date_min</field>
+					<field>Invoice_Search_cv:Invoice_taxes_percent_max</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_date_max" type="datetime">
+			<widget name="Invoice_taxes_percent_min" type="double">
 				<labels>
-					<label mode="any">label.search.and</label>
+					<label mode="any">label.invoice.taxes_percent.min</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_date_max</field>
+					<field>Invoice_Search_cv:Invoice_taxes_percent_min</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_created_min" type="datetime">
+			<widget name="Invoice_total_max" type="double">
 				<labels>
-					<label mode="any">label.factura.created</label>
+					<label mode="any">label.invoice.total.max</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_created_min</field>
+					<field>Invoice_Search_cv:Invoice_total_max</field>
 				</fields>
 			</widget>
-			<widget name="Invoice_created_max" type="datetime">
+			<widget name="Invoice_total_min" type="double">
 				<labels>
-					<label mode="any">label.search.and</label>
+					<label mode="any">label.invoice.total.min</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>Invoice_Search_cv:Invoice_created_max</field>
+					<field>Invoice_Search_cv:Invoice_total_min</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_issued_min" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_issued.min</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_issued_min</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_issued_max" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_issued.max</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_issued_max</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_paid_min" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_paid.min</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_paid_min</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_paid_max" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_paid.max</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_paid_max</field>
+				</fields>
+			</widget>
+
+			<widget name="Invoice_date_created_min" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_created.min</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_created_min</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_created_max" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_created.max</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_created_max</field>
 				</fields>
 			</widget>
 		</layout>
@@ -642,7 +622,7 @@
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.title</property>
+						<property name="label">label.invoice.title</property>
 						<property name="sortPropertyName">dc:title</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -653,26 +633,11 @@
 					</properties>
 					<widget>listing_title_link</widget>
 				</column>
-				<column name="date">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.date</property>
-						<property name="sortPropertyName">Invoice:date</property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<widget>date</widget>
-				</column>
 				<column name="number">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.number</property>
+						<property name="label">label.invoice.number</property>
 						<property name="sortPropertyName">Invoice:number</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -683,12 +648,12 @@
 					</properties>
 					<widget>number</widget>
 				</column>
-				<column name="provider">
+				<column name="issuer_id">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.provider</property>
-						<property name="sortPropertyName">Invoice:provider</property>
+						<property name="label">label.invoice.issuer.id</property>
+						<property name="sortPropertyName">Invoice:issuer_id</property>
 					</properties>
 					<properties mode="edit_sort_infos">
 						<property name="showInSortInfoSelection">true</property>
@@ -696,13 +661,88 @@
 					<properties mode="edit_sort_infos_map">
 						<property name="showInSortInfoSelection">true</property>
 					</properties>
-					<widget>provider</widget>
+					<widget>issuer_id</widget>
+				</column>
+				<column name="issuer_code">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.issuer.code</property>
+						<property name="sortPropertyName">Invoice:issuer_code</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>issuer_code</widget>
+				</column>
+				<column name="billTo_id">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.billTo.id</property>
+						<property name="sortPropertyName">Invoice:billTo_id</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>billTo_id</widget>
+				</column>
+				<column name="billTo_code">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.billTo.code</property>
+						<property name="sortPropertyName">Invoice:billTo_code</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>billTo_code</widget>
+				</column>
+				<column name="date_issued">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.date_issued</property>
+						<property name="sortPropertyName">Invoice:date_issued</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>date_issued</widget>
+				</column>
+				<column name="date_paid">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.date_paid</property>
+						<property name="sortPropertyName">Invoice:date_paid</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>date_paid</widget>
 				</column>
 				<column name="state">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.state</property>
+						<property name="label">label.invoice.state</property>
 						<property name="sortPropertyName">Invoice:state</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -713,26 +753,11 @@
 					</properties>
 					<widget>state</widget>
 				</column>
-				<column name="type">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.type</property>
-						<property name="sortPropertyName">Invoice:type</property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<widget>type</widget>
-				</column>
 				<column name="subtotal">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.subtotal</property>
+						<property name="label">label.invoice.subtotal</property>
 						<property name="sortPropertyName">Invoice:subtotal</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -747,7 +772,7 @@
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.taxes</property>
+						<property name="label">label.invoice.taxes</property>
 						<property name="sortPropertyName">Invoice:taxes</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -762,7 +787,7 @@
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.total</property>
+						<property name="label">label.invoice.total</property>
 						<property name="sortPropertyName">Invoice:total</property>
 					</properties>
 					<properties mode="edit_sort_infos">
@@ -773,12 +798,12 @@
 					</properties>
 					<widget>total</widget>
 				</column>
-				<column name="bill">
+				<column name="type">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass"></property>
-						<property name="label">label.factura.bill</property>
-						<property name="sortPropertyName">Invoice:bill</property>
+						<property name="label">label.invoice.type</property>
+						<property name="sortPropertyName">Invoice:type</property>
 					</properties>
 					<properties mode="edit_sort_infos">
 						<property name="showInSortInfoSelection">true</property>
@@ -786,82 +811,12 @@
 					<properties mode="edit_sort_infos_map">
 						<property name="showInSortInfoSelection">true</property>
 					</properties>
-					<widget>bill</widget>
-				</column>
-				<column name="nxl_unknown_col" selectedByDefault="false">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label"></property>
-						<property name="sortPropertyName"></property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-				</column>
-				<column name="nxl_unknown_col_1" selectedByDefault="false">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label"></property>
-						<property name="sortPropertyName"></property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-				</column>
-				<column name="nxl_unknown_col_2" selectedByDefault="false">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label"></property>
-						<property name="sortPropertyName"></property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-				</column>
-				<column name="nxl_unknown_col_3" selectedByDefault="false">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label"></property>
-						<property name="sortPropertyName"></property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-				</column>
-				<column name="nxl_unknown_col_4" selectedByDefault="false">
-					<properties mode="any">
-						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
-						<property name="columnStyleClass"></property>
-						<property name="label"></property>
-						<property name="sortPropertyName"></property>
-					</properties>
-					<properties mode="edit_sort_infos">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
-					<properties mode="edit_sort_infos_map">
-						<property name="showInSortInfoSelection">true</property>
-					</properties>
+					<widget>type</widget>
 				</column>
 			</columns>
 			<widget name="listing_title_link" type="listing_title_link">
 				<labels>
-					<label mode="any">label.factura.title</label>
+					<label mode="any">label.invoice.title</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -872,66 +827,97 @@
 					<field>data.file.content.filename</field>
 				</fields>
 			</widget>
-			<widget name="date" type="datetime">
-				<labels>
-					<label mode="any">label.factura.date</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>data['Invoice']['date']</field>
-				</fields>
-			</widget>
 			<widget name="number" type="text">
 				<labels>
-					<label mode="any">label.factura.number</label>
+					<label mode="any">label.invoice.number</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>data['Invoice']['number']</field>
 				</fields>
 			</widget>
-			<widget name="provider" type="text">
+
+			<widget name="date_issued" type="datetime">
 				<labels>
-					<label mode="any">label.factura.provider</label>
+					<label mode="any">label.invoice.date_issued</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
-					<field>data['Invoice']['provider']</field>
+					<field>data['Invoice']['date_issued']</field>
+				</fields>
+			</widget>
+			<widget name="date_paid" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_paid</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['date_paid']</field>
+				</fields>
+			</widget>
+			<widget name="issuer_id" type="text">
+				<labels>
+					<label mode="any">label.invoice.issuer.id</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['issuer_id']</field>
+				</fields>
+			</widget>
+			<widget name="issuer_code" type="text">
+				<labels>
+					<label mode="any">label.invoice.issuer.code</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['issuer_code']</field>
+				</fields>
+			</widget>
+			<widget name="billTo_id" type="text">
+				<labels>
+					<label mode="any">label.invoice.billTo.id</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['billTo_id']</field>
+				</fields>
+			</widget>
+			<widget name="billTo_code" type="text">
+				<labels>
+					<label mode="any">label.invoice.billTo.code</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['billTo_code']</field>
 				</fields>
 			</widget>
 			<widget name="state" type="text">
 				<labels>
-					<label mode="any">label.factura.state</label>
+					<label mode="any">label.invoice.state</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>data['Invoice']['state']</field>
 				</fields>
-				<properties widgetMode="view">
-					<property name="localize">true</property>
-				</properties>
 				<properties mode="any">
 					<property name="localize">true</property>
 				</properties>
 			</widget>
 			<widget name="type" type="text">
 				<labels>
-					<label mode="any">label.factura.type</label>
+					<label mode="any">label.invoice.type</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>data['Invoice']['type']</field>
 				</fields>
-				<properties widgetMode="view">
-					<property name="localize">true</property>
-				</properties>
 				<properties mode="any">
 					<property name="localize">true</property>
 				</properties>
 			</widget>
 			<widget name="subtotal" type="text">
 				<labels>
-					<label mode="any">label.factura.subtotal</label>
+					<label mode="any">label.invoice.subtotal</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -940,7 +926,7 @@
 			</widget>
 			<widget name="taxes" type="text">
 				<labels>
-					<label mode="any">label.factura.taxes</label>
+					<label mode="any">label.invoice.taxes</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
@@ -949,20 +935,11 @@
 			</widget>
 			<widget name="total" type="text">
 				<labels>
-					<label mode="any">label.factura.total</label>
+					<label mode="any">label.invoice.total</label>
 				</labels>
 				<translated>true</translated>
 				<fields>
 					<field>data['Invoice']['total']</field>
-				</fields>
-			</widget>
-			<widget name="bill" type="text">
-				<labels>
-					<label mode="any">label.factura.bill</label>
-				</labels>
-				<translated>true</translated>
-				<fields>
-					<field>data['Invoice']['bill']</field>
 				</fields>
 			</widget>
 		</layout>

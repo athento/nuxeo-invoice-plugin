@@ -5,9 +5,9 @@
 
   
   <groupId>org.athento.nuxeo</groupId>
-  <artifactId>Invoice</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  <name>Invoice</name>
+  <artifactId>nuxeo-invoice-plugin</artifactId>
+    <version>1.0</version>
+  <name>nuxeo-invoice-plugin</name>
   <description>
     
   </description>

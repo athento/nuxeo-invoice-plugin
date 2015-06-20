@@ -32,7 +32,7 @@
 				<layout>layout@Invoice-edit</layout>
 			</layouts>
 			<layouts mode="view">
-				<layout>layout@Invoice-view</layout>
+				<layout>layout@Invoice-edit</layout>
 			</layouts>
 		</type>
 		<type id="Invoice_Search_cv">
