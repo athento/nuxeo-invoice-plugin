@@ -31,6 +31,9 @@
 					<predicate parameter="Invoice:billTo_id" operator="STARTSWITH">
 						<field schema="Invoice_Search_cv" name="Invoice_issuer_id"/>
 					</predicate>
+					<predicate parameter="Invoice:locator" operator="STARTSWITH">
+						<field schema="Invoice_Search_cv" name="Invoice_locator"/>
+					</predicate>
 					<predicate parameter="Invoice:number" operator="STARTSWITH">
 						<field schema="Invoice_Search_cv" name="Invoice_number"/>
 					</predicate>

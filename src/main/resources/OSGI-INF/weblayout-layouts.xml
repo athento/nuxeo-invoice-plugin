@@ -20,6 +20,12 @@
 				</row>
 				<row>
 					<properties mode="any">
+						<property name="nxl_colspan_0">2</property>
+					</properties>
+					<widget>locator</widget>
+				</row>
+				<row>
+					<properties mode="any">
 						<property name="nxl_colspan_0">1</property>
 						<property name="nxl_colspan_1">1</property>
 					</properties>
@@ -155,6 +161,15 @@
 					<field>Invoice:issuer_id</field>
 				</fields>
 			</widget>
+			<widget name="locator" type="text">
+				<labels>
+					<label mode="any">label.invoice.locator</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:locator</field>
+				</fields>
+			</widget>
 			<widget name="number" type="text">
 				<labels>
 					<label mode="any">label.invoice.number</label>
@@ -271,6 +286,12 @@
 				</row>
 				<row>
 					<properties mode="any">
+						<property name="nxl_colspan_0">2</property>
+					</properties>
+					<widget>Invoice_locator</widget>
+				</row>
+				<row>
+					<properties mode="any">
 						<property name="nxl_colspan_0">1</property>
 						<property name="nxl_colspan_1">1</property>
 					</properties>
@@ -370,6 +391,15 @@
 				<translated>true</translated>
 				<fields>
 					<field>Invoice_Search_cv:Invoice_number</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_locator" type="text">
+				<labels>
+					<label mode="any">label.invoice.locator</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_locator</field>
 				</fields>
 			</widget>
 			<widget name="Invoice_issuer_code" type="text">
@@ -648,6 +678,21 @@
 					</properties>
 					<widget>number</widget>
 				</column>
+				<column name="locator">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.locator</property>
+						<property name="sortPropertyName">Invoice:locator</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>locator</widget>
+				</column>
 				<column name="issuer_id">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
@@ -836,7 +881,15 @@
 					<field>data['Invoice']['number']</field>
 				</fields>
 			</widget>
-
+			<widget name="locator" type="text">
+				<labels>
+					<label mode="any">label.invoice.locator</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['locator']</field>
+				</fields>
+			</widget>
 			<widget name="date_issued" type="datetime">
 				<labels>
 					<label mode="any">label.invoice.date_issued</label>

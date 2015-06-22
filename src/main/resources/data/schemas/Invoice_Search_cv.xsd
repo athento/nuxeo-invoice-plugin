@@ -49,8 +49,9 @@
 	<xs:element name="Invoice_issuer_code" type="xs:string" />
 	<xs:element name="Invoice_issuer_id" type="xs:string" />
 
+	<xs:element name="Invoice_locator" type="xs:string" />
 	<xs:element name="Invoice_number" type="xs:string" />
-
+	
 	<xs:element name="Invoice_state" type="xs:string" />
 	<xs:element name="Invoice_subtotal_min" type="xs:double" />
 	<xs:element name="Invoice_subtotal_max" type="xs:double" />

@@ -50,6 +50,9 @@
 	<xs:element name="issuer_code" type="xs:string" />
 	<!-- Id of the invoice issuer -->
 	<xs:element name="issuer_id" type="xs:string" />
+	
+	<!-- Id of the invoice (internal register number) -->
+	<xs:element name="locator" type="xs:string" />
 	<!-- Id of the invoice (internal register number) -->
 	<xs:element name="number" type="xs:string" />
 	
