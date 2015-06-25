@@ -41,6 +41,8 @@
 	<!-- ID of the invoice receiver -->
 	<xs:element name="billTo_id" type="xs:string" />
 
+	<!-- When the invoice arrived in the system -->
+	<xs:element name="date_arrived" type="xs:date" />
 	<!-- When the invoice was issued -->
 	<xs:element name="date_issued" type="xs:date" />
 	<!-- When the invoice has been paid -->
@@ -55,7 +57,9 @@
 	<xs:element name="locator" type="xs:string" />
 	<!-- Id of the invoice (internal register number) -->
 	<xs:element name="number" type="xs:string" />
-	
+
+	<!-- Observations -->
+	<xs:element name="observations" type="xs:string" />	
 	<!-- Vocabulary field. See InvoceStates.csv -->
 	<xs:element name="state" type="xs:string" />
 	<!-- Price before taxes -->

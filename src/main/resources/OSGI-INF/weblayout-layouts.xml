@@ -20,9 +20,11 @@
 				</row>
 				<row>
 					<properties mode="any">
-						<property name="nxl_colspan_0">2</property>
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
 					</properties>
 					<widget>locator</widget>
+					<widget>date_arrived</widget>
 				</row>
 				<row>
 					<properties mode="any">
@@ -82,6 +84,12 @@
 					<properties mode="any">
 						<property name="nxl_colspan_0">2</property>
 					</properties>
+					<widget>observations</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">2</property>
+					</properties>
 					<widget>description</widget>
 				</row>
 			</rows>
@@ -111,6 +119,15 @@
 				<fields>
 					<field>file:content</field>
 					<field>file:filename</field>
+				</fields>
+			</widget>
+			<widget name="date_arrived" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_arrived</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:date_arrived</field>
 				</fields>
 			</widget>
 			<widget name="date_issued" type="datetime">
@@ -206,7 +223,18 @@
 					<field>Invoice:taxes_percent</field>
 				</fields>
 			</widget>
-
+			<widget name="observations" type="textarea">
+				<labels>
+					<label mode="any">label.invoice.observations</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice:observations</field>
+				</fields>
+				<properties widgetMode="any">
+					<property name="styleClass">dataInputText</property>
+				</properties>
+			</widget>
 			<widget name="state" type="selectOneDirectory">
 				<labels>
 					<label mode="any">label.invoice.state</label>
@@ -282,6 +310,12 @@
 					<properties mode="any">
 						<property name="nxl_colspan_0">2</property>
 					</properties>
+					<widget>Invoice_observations</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">2</property>
+					</properties>
 					<widget>Invoice_number</widget>
 				</row>
 				<row>
@@ -349,6 +383,14 @@
 					</properties>
 					<widget>Invoice_total_min</widget>
 					<widget>Invoice_total_max</widget>
+				</row>
+				<row>
+					<properties mode="any">
+						<property name="nxl_colspan_0">1</property>
+						<property name="nxl_colspan_1">1</property>
+					</properties>
+					<widget>Invoice_date_arrived_min</widget>
+					<widget>Invoice_date_arrived_max</widget>
 				</row>
 				<row>
 					<properties mode="any">
@@ -436,6 +478,15 @@
 				<translated>true</translated>
 				<fields>
 					<field>Invoice_Search_cv:Invoice_billTo_id</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_observations" type="textarea">
+				<labels>
+					<label mode="any">label.invoice.observations</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_observations</field>
 				</fields>
 			</widget>
 			<widget name="Invoice_state" type="selectOneDirectory">
@@ -575,6 +626,24 @@
 				<translated>true</translated>
 				<fields>
 					<field>Invoice_Search_cv:Invoice_date_paid_max</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_arrived_min" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_arrived.min</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_arrived_min</field>
+				</fields>
+			</widget>
+			<widget name="Invoice_date_arrived_max" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_arrived.max</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>Invoice_Search_cv:Invoice_date_arrived_max</field>
 				</fields>
 			</widget>
 
@@ -753,6 +822,21 @@
 					</properties>
 					<widget>billTo_code</widget>
 				</column>
+				<column name="date_arrived">
+					<properties mode="any">
+						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
+						<property name="columnStyleClass"></property>
+						<property name="label">label.invoice.date_arrived</property>
+						<property name="sortPropertyName">Invoice:date_arrived</property>
+					</properties>
+					<properties mode="edit_sort_infos">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<properties mode="edit_sort_infos_map">
+						<property name="showInSortInfoSelection">true</property>
+					</properties>
+					<widget>date_arrived</widget>
+				</column>
 				<column name="date_issued">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
@@ -888,6 +972,15 @@
 				<translated>true</translated>
 				<fields>
 					<field>data['Invoice']['locator']</field>
+				</fields>
+			</widget>
+			<widget name="date_arrived" type="datetime">
+				<labels>
+					<label mode="any">label.invoice.date_arrived</label>
+				</labels>
+				<translated>true</translated>
+				<fields>
+					<field>data['Invoice']['date_arrived']</field>
 				</fields>
 			</widget>
 			<widget name="date_issued" type="datetime">
