@@ -17,6 +17,10 @@
 						<field schema="Invoice_Search_cv" name="Invoice_created_min"/>
 						<field schema="Invoice_Search_cv" name="Invoice_created_max"/>
 					</predicate>
+					<predicate parameter="Invoice:date_arrived" operator="BETWEEN">
+						<field schema="Invoice_Search_cv" name="Invoice_date_arrived_min"/>
+						<field schema="Invoice_Search_cv" name="Invoice_date_arrived_max"/>
+					</predicate>
 					<predicate parameter="Invoice:date_issued" operator="BETWEEN">
 						<field schema="Invoice_Search_cv" name="Invoice_issued_min"/>
 						<field schema="Invoice_Search_cv" name="Invoice_issued_max"/>
@@ -36,6 +40,9 @@
 					</predicate>
 					<predicate parameter="Invoice:number" operator="STARTSWITH">
 						<field schema="Invoice_Search_cv" name="Invoice_number"/>
+					</predicate>
+					<predicate parameter="Invoice:observations" operator="STARTSWITH">
+						<field schema="Invoice_Search_cv" name="Invoice_observations"/>
 					</predicate>
 					<predicate parameter="Invoice:state" operator="=">
 						<field schema="Invoice_Search_cv" name="Invoice_state"/>

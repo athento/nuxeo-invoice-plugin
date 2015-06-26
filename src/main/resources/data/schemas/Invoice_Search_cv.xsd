@@ -39,6 +39,8 @@
 	<xs:element name="Invoice_billTo_code" type="xs:string" />
 	<xs:element name="Invoice_billTo_id" type="xs:string" />
 
+	<xs:element name="Invoice_date_arrived_min" type="xs:date" />
+	<xs:element name="Invoice_date_arrived_max" type="xs:date" />
 	<xs:element name="Invoice_date_created_min" type="xs:date" />
 	<xs:element name="Invoice_date_created_max" type="xs:date" />
 	<xs:element name="Invoice_date_issued_min" type="xs:date" />
@@ -52,6 +54,7 @@
 	<xs:element name="Invoice_locator" type="xs:string" />
 	<xs:element name="Invoice_number" type="xs:string" />
 	
+	<xs:element name="Invoice_observations" type="xs:string" />
 	<xs:element name="Invoice_state" type="xs:string" />
 	<xs:element name="Invoice_subtotal_min" type="xs:double" />
 	<xs:element name="Invoice_subtotal_max" type="xs:double" />
